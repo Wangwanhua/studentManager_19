@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>登录页面</title>
+  <title>登录页</title>
 
   <!-- Bootstrap -->
   <link href="../lib/css/bootstrap.min.css" rel="stylesheet">
@@ -22,6 +22,7 @@
       }
       .code-img{
         height: 34px;
+        cursor: pointer;
       }
     </style>
 </head>
@@ -36,7 +37,7 @@
           <div class="panel-heading">登陆学生管理系统</div>
           <div class="panel-body">
             <!-- 内容表单 -->
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="/login" method="POST">
               <div class="form-group">
                 <label for="userName" class="col-sm-2 control-label">用户名</label>
                 <div class="col-sm-10">
@@ -55,14 +56,14 @@
                   <input type="text" name="code" class="form-control" id="code" placeholder="请输入验证码">
                 </div>
                 <div class="col-sm-4">
-                  <img class="code-img" src="../img/code.PNG" alt="">
+                  <img class="code-img" src="/login/captchaImg.png" alt="">
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                   <button type="submit" class="btn btn-default">登陆</button>
-                  <button type="submit" class="btn btn-danger">注册</button>
+                  <a href="/register" class="btn btn-danger">注册</a>
                 </div>
               </div>
             </form>
@@ -80,3 +81,16 @@
 <script src="../lib/js/jquery-1.12.4.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../lib/js/bootstrap.min.js"></script>
+<script>
+  // 入口函数
+  $(function () {  
+
+    $('.code-img').click(function () {  
+      // 重新获取验证图片
+      // 重新赋值 src属性即可
+      // 两次设置的url是一致
+      // 浏览器默认为图片没有变,在后面拼接上段随机数
+      $(this).attr('src',$(this).attr('src')+`?${Math.random()}`)
+    })
+  })
+</script>
